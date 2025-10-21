@@ -1,0 +1,34 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script>
+  const kategoriLinks = document.querySelectorAll(".kategori-item");
+  const products = document.querySelectorAll(".produk");
+  kategoriLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const kategori = this.dataset.kategori;
+      products.forEach((product) => {
+        if (kategori == "semua" || product.dataset.kategori === kategori) {
+          product.style.display = "block";
+        } else {
+          product.style.display = "none";
+        }
+        document.getElementById("kategori").scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    });
+  });
+
+  const pesanBtns = document.querySelectorAll(".pesan-btn");
+  pesanBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const card = this.closest(".card-body");
+      const nama = card.querySelector(".nama-produk").innerText;
+      const harga = card.querySelector(".harga-produk").innerText;
+      const nomorWA = "6285240642632";
+      const pesan = `Halo, saya tertarik membeli *${nama}* dengan harga *${harga}. Apakah masih tersedia?`;
+      const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, "_blank");
+    });
+  });
+</script>
